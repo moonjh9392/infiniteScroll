@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { down, init, up, selectValue } from '../slices/counterSlice';
 import styled from 'styled-components';
+import Todo from '../components/Todo';
+import UsersPage from '../components/UsersPage';
 
 const MainStyle = styled.div`
   overflow-y: auto;
@@ -25,7 +27,12 @@ const Main = () => {
   const initNumber = () => {
     dispach(init());
   };
-  return <MainStyle></MainStyle>;
+  return (
+    <MainStyle>
+      <Todo />
+      <UsersPage />
+    </MainStyle>
+  );
 };
 
 export default Main;
