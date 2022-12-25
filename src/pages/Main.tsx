@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { down, init, up, selectValue } from '../slices/counterSlice';
 import styled from 'styled-components';
-import { Scroll } from '../components/Scroll';
 
 const MainStyle = styled.div`
   overflow-y: auto;
@@ -26,18 +25,7 @@ const Main = () => {
   const initNumber = () => {
     dispach(init());
   };
-  return (
-    <MainStyle>
-      {/* <div>{count}</div>
-      <button onClick={addNumber}>+</button>
-      <button onClick={minusNumber}>-</button>
-      <button onClick={initNumber}>초기화</button> */}
-      <br />
-      {/* 일반 js 무한스크롤 */}
-      {/* <Scroll /> */}
-      {/* 옵저버 무한스크롤 */}
-    </MainStyle>
-  );
+  return <MainStyle></MainStyle>;
 };
 
 export default Main;
