@@ -19,7 +19,7 @@ export interface User {
 const todos = ['먹기', '자기', '놀기'];
 
 // [코드 2] MSW 유저 목록 모킹 API
-const users = Array.from(Array(1024).keys()).map(
+const users = Array.from(Array(256).keys()).map(
   (id): User => ({
     id,
     name: `denis${id}`,
@@ -44,6 +44,8 @@ export const handlers = [
     const { searchParams } = req.url;
     const size = Number(searchParams.get('size'));
     const page = Number(searchParams.get('page'));
+
+    console.log(size, page);
     const totalCount = users.length;
     const totalPages = Math.round(totalCount / size);
 

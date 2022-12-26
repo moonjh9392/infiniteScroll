@@ -4,12 +4,15 @@ import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { PaginationResponse, User } from '../mocks/handlers';
 import Loading from './common/Loading';
+import { throttle } from 'lodash';
 
 // [코드 3] Scroll event를 이용한 무한스크롤 예시
-const CARD_SIZE = 3;
-console.log(visualViewport);
+
+//Card 컴포넌트의 heigth 사이즈
+const CARD_SIZE = 50;
+
 const PAGE_SIZE = visualViewport && 10 * Math.ceil(visualViewport.width / CARD_SIZE);
-console.log(PAGE_SIZE);
+
 function UsersPage() {
   const [page, setPage] = useState(0);
   const [users, setUsers] = useState<User[]>([]);
@@ -28,13 +31,15 @@ function UsersPage() {
 
   useEffect(() => {
     const handleScroll = () => {
+      console.log('handleScroll');
       const { scrollTop, offsetHeight } = document.documentElement;
       if (window.innerHeight + scrollTop >= offsetHeight) {
         setFetching(true);
       }
     };
+
     setFetching(true);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', throttle(handleScroll, 500));
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

@@ -4,14 +4,11 @@ import { down, init, up, selectValue } from '../slices/counterSlice';
 import styled from 'styled-components';
 import Todo from '../components/Todo';
 import UsersPage from '../components/UsersPage';
+import { UsersPage2 } from '../components/UsersPage2';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 
+const queryClient = new QueryClient();
 const MainStyle = styled.div`
-  overflow-y: auto;
-  margin-top: 300px;
-  height: 60vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: solid 1px black;
 `;
 
@@ -30,7 +27,12 @@ const Main = () => {
   return (
     <MainStyle>
       <Todo />
-      <UsersPage />
+      {/* 스크롤 이벤트  */}
+      {/* <UsersPage /> */}
+      {/* 옵저버 */}
+      <QueryClientProvider client={queryClient}>
+        <UsersPage2 />
+      </QueryClientProvider>
     </MainStyle>
   );
 };
