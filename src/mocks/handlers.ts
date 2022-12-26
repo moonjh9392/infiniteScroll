@@ -45,7 +45,6 @@ export const handlers = [
     const size = Number(searchParams.get('size'));
     const page = Number(searchParams.get('page'));
 
-    console.log(size, page);
     const totalCount = users.length;
     const totalPages = Math.round(totalCount / size);
 
