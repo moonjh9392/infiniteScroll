@@ -12,14 +12,25 @@ export function UsersPage2() {
     size: PAGE_SIZE,
   });
 
+  //flatMap : 각 엘리먼트에 대해 map 수행 후, 결과를 새로운 배열로 평탄화함
   const users = useMemo(() => (data ? data.pages.flatMap(({ data }) => data.contents) : []), [data]);
 
-  const ref = useIntersect(async (entry, observer) => {
-    observer.unobserve(entry.target);
-    if (hasNextPage && !isFetching) {
-      fetchNextPage();
-    }
-  });
+  const ref = useIntersect(
+    //entry
+    async (entry, observer) => {
+      //관찰 중단
+      observer.unobserve(entry.target);
+      //다음페이지가 있고 isFetching : false 이면 데이터 들고옴
+      if (hasNextPage && !isFetching) {
+        fetchNextPage();
+      }
+    },
+    //options
+    //root : 기본값 null = 브라우저 뷰포트
+    //rootMargin : root 요소의 마진값. 기본값은 0px.
+    //threshold : 0.0 ~ 1.0 사이의 숫자들을 배열로 받는다. 이는 %로 치환되어, 해당 비율만큼 교차된 경우 콜백이 실행된다.
+    { root: null, rootMargin: '0px', threshold: 1.0 }
+  );
 
   return (
     <Container>

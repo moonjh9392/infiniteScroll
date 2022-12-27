@@ -19,6 +19,7 @@ export interface User {
 const todos = ['먹기', '자기', '놀기'];
 
 // [코드 2] MSW 유저 목록 모킹 API
+//데이터 생성
 const users = Array.from(Array(256).keys()).map(
   (id): User => ({
     id,
